@@ -21,26 +21,31 @@ export default function JangsuDetailPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // TODO: API로 장수 데이터를 가져오는 로직 구현
-    const tempData: Jangsu = {
-      id: params.id as string,
-      title: '나의 첫 번째 장수',
-      birthDate: '1990-01-01',
-      deathDate: '2070-12-31',
-      story: '이것은 나의 인생 이야기입니다...',
-      wishes: '마지막으로 하고 싶은 것들...',
-      messages: '사랑하는 이들에게 전하는 메시지...',
-      status: 'draft'
-    }
-    setJangsu(tempData)
-    setLoading(false)
+    // 임시 데이터 로딩 시뮬레이션
+    const timer = setTimeout(() => {
+      setJangsu({
+        id: params.id as string,
+        title: '나의 첫 번째 장수',
+        birthDate: '1990-01-01',
+        deathDate: '2070-12-31',
+        story: '이것은 나의 인생 이야기입니다...',
+        wishes: '마지막으로 하고 싶은 것들...',
+        messages: '사랑하는 이들에게 전하는 메시지...',
+        status: '임시저장'
+      })
+      setLoading(false)
+    }, 1000)
+
+    return () => clearTimeout(timer)
   }, [params.id])
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-gray-600">로딩 중...</div>
-      </div>
+      <main className="min-h-screen p-8">
+        <div className="max-w-2xl mx-auto">
+          <p className="text-center text-gray-600">로딩 중...</p>
+        </div>
+      </main>
     )
   }
 
