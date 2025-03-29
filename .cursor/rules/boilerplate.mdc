@@ -1,0 +1,20 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+- You can @ files here
+- You can use markdown but dont have to
+
+[README.md](mdc:README.md)
+[jest.config.js](mdc:jest.config.js)
+[prettier.config.js](mdc:prettier.config.js)
+[env.mjs](mdc:env.mjs)
+
+중요 파일이니 기억하고 따르도록 해
+
+nvm use 20
+node 버전을 확인하고 node 버전에 맞게 실행하도록 해.
