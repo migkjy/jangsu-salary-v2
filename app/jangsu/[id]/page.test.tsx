@@ -1,20 +1,21 @@
 import { render, screen, waitFor } from '@testing-library/react'
+import { useParams, useRouter } from 'next/navigation'
 import JangsuDetailPage from './page'
 
 jest.mock('next/navigation', () => ({
-  useRouter() {
-    return {
-      push: jest.fn(),
-      back: jest.fn(),
-      forward: jest.fn(),
-    }
-  },
-  useParams() {
-    return { id: '1' }
-  }
+  useParams: jest.fn(),
+  useRouter: jest.fn(),
 }))
 
 describe('JangsuDetailPage', () => {
+  beforeEach(() => {
+    (useParams as jest.Mock).mockReturnValue({ id: '1' })
+    (useRouter as jest.Mock).mockReturnValue({
+      push: jest.fn(),
+      back: jest.fn(),
+    })
+  })
+
   it('shows loading state initially', () => {
     render(<JangsuDetailPage />)
     expect(screen.getByText('로딩 중...')).toBeInTheDocument()

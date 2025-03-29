@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 interface Jangsu {
   id: string
@@ -15,37 +15,28 @@ interface Jangsu {
 }
 
 export default function JangsuDetailPage() {
-  const params = useParams()
   const router = useRouter()
+  const params = useParams()
   const [jangsu, setJangsu] = useState<Jangsu | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchJangsu = async () => {
-      try {
-        // TODO: API 호출로 장수 데이터를 가져옵니다
-        // 임시 데이터
-        setJangsu({
-          id: params.id as string,
-          title: '나의 첫 번째 장수',
-          birthDate: '1990-01-01',
-          deathDate: '2070-12-31',
-          story: '이것은 나의 인생 이야기입니다. 많은 일들이 있었고, 그 속에서 배운 것들이 있습니다.',
-          wishes: '모든 사람들이 행복하게 살았으면 좋겠습니다.',
-          messages: '사랑하는 가족들에게: 항상 감사했습니다.',
-          status: 'draft'
-        })
-      } catch (error) {
-        console.error('Failed to fetch jangsu:', error)
-      } finally {
-        setIsLoading(false)
-      }
+    // TODO: API로 장수 데이터를 가져오는 로직 구현
+    const tempData: Jangsu = {
+      id: params.id as string,
+      title: '나의 첫 번째 장수',
+      birthDate: '1990-01-01',
+      deathDate: '2070-12-31',
+      story: '이것은 나의 인생 이야기입니다...',
+      wishes: '마지막으로 하고 싶은 것들...',
+      messages: '사랑하는 이들에게 전하는 메시지...',
+      status: 'draft'
     }
-
-    fetchJangsu()
+    setJangsu(tempData)
+    setLoading(false)
   }, [params.id])
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-gray-600">로딩 중...</div>

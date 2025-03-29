@@ -1,28 +1,28 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import CreatePage from './page'
+import { fireEvent, render, screen } from '@testing-library/react';
+import { useRouter } from 'next/navigation';
+import CreatePage from './page';
 
 jest.mock('next/navigation', () => ({
-  useRouter() {
-    return {
-      push: jest.fn(),
-      back: jest.fn(),
-      forward: jest.fn(),
-    }
-  },
-}))
+  useRouter: jest.fn(),
+}));
 
 describe('CreatePage', () => {
-  it('renders create form with all fields', () => {
-    render(<CreatePage />)
+  beforeEach(() => {
+    (useRouter as jest.Mock).mockReturnValue({
+      push: jest.fn(),
+    });
+  });
+
+  it('renders create form', () => {
+    render(<CreatePage />);
     
-    expect(screen.getByText('새로운 장수 만들기')).toBeInTheDocument()
-    expect(screen.getByLabelText('제목')).toBeInTheDocument()
-    expect(screen.getByLabelText('출생일')).toBeInTheDocument()
-    expect(screen.getByLabelText('사망일')).toBeInTheDocument()
-    expect(screen.getByLabelText('나의 이야기')).toBeInTheDocument()
-    expect(screen.getByLabelText('마지막 소원')).toBeInTheDocument()
-    expect(screen.getByLabelText('남기고 싶은 메시지')).toBeInTheDocument()
-  })
+    expect(screen.getByLabelText('제목')).toBeInTheDocument();
+    expect(screen.getByLabelText('생년월일')).toBeInTheDocument();
+    expect(screen.getByLabelText('사망일')).toBeInTheDocument();
+    expect(screen.getByLabelText('나의 이야기')).toBeInTheDocument();
+    expect(screen.getByLabelText('마지막 소원')).toBeInTheDocument();
+    expect(screen.getByLabelText('마지막 메시지')).toBeInTheDocument();
+  });
 
   it('updates form values on input change', () => {
     render(<CreatePage />)

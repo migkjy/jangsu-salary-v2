@@ -1,27 +1,28 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import SignupPage from './page'
+import { fireEvent, render, screen } from '@testing-library/react';
+import { useRouter } from 'next/navigation';
+import SignupPage from './page';
 
 jest.mock('next/navigation', () => ({
-  useRouter() {
-    return {
-      push: jest.fn(),
-      back: jest.fn(),
-      forward: jest.fn(),
-    }
-  },
-}))
+  useRouter: jest.fn(),
+}));
 
 describe('SignupPage', () => {
+  beforeEach(() => {
+    (useRouter as jest.Mock).mockReturnValue({
+      push: jest.fn(),
+    });
+  });
+
   it('renders signup form', () => {
-    render(<SignupPage />)
+    render(<SignupPage />);
     
-    expect(screen.getByText('회원가입')).toBeInTheDocument()
-    expect(screen.getByLabelText('이름')).toBeInTheDocument()
-    expect(screen.getByLabelText('이메일')).toBeInTheDocument()
-    expect(screen.getByLabelText('비밀번호')).toBeInTheDocument()
-    expect(screen.getByLabelText('비밀번호 확인')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: '가입하기' })).toBeInTheDocument()
-  })
+    expect(screen.getByText('회원가입')).toBeInTheDocument();
+    expect(screen.getByLabelText('이름')).toBeInTheDocument();
+    expect(screen.getByLabelText('이메일')).toBeInTheDocument();
+    expect(screen.getByLabelText('비밀번호')).toBeInTheDocument();
+    expect(screen.getByLabelText('비밀번호 확인')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '회원가입' })).toBeInTheDocument();
+  });
 
   it('updates form values on input change', () => {
     render(<SignupPage />)

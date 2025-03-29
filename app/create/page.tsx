@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 interface JangsuForm {
   title: string
@@ -32,8 +32,8 @@ export default function CreatePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: API 호출로 장수 생성
-    console.log('Create jangsu:', formData)
+    // TODO: 장수 생성 로직 구현
+    console.log('장수 생성 시도:', formData)
     router.push('/mypage')
   }
 

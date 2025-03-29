@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 interface JangsuPreview {
   id: string
@@ -14,26 +14,22 @@ export default function MyPage() {
   const [jangsuList, setJangsuList] = useState<JangsuPreview[]>([])
 
   useEffect(() => {
-    // TODO: API 호출로 사용자의 장수 목록을 가져옵니다
-    const fetchJangsuList = async () => {
-      // 임시 데이터
-      setJangsuList([
-        {
-          id: '1',
-          title: '나의 첫 번째 장수',
-          createdAt: '2024-03-29',
-          status: 'draft'
-        },
-        {
-          id: '2',
-          title: '완성된 장수',
-          createdAt: '2024-03-28',
-          status: 'published'
-        }
-      ])
-    }
-
-    fetchJangsuList()
+    // TODO: API로 장수 목록을 가져오는 로직 구현
+    const tempData: JangsuPreview[] = [
+      {
+        id: '1',
+        title: '나의 첫 번째 장수',
+        createdAt: '2024-03-20',
+        status: 'draft'
+      },
+      {
+        id: '2',
+        title: '완성된 장수',
+        createdAt: '2024-03-19',
+        status: 'published'
+      }
+    ];
+    setJangsuList(tempData);
   }, [])
 
   return (

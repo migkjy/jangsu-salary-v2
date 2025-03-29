@@ -1,18 +1,16 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export default function LoginPage() {
-  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     // TODO: 로그인 로직 구현
-    console.log('Login attempt:', { email, password })
+    console.log('로그인 시도:', { email, password })
   }
 
   return (

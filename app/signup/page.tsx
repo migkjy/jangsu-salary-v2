@@ -1,27 +1,31 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export default function SignupPage() {
-  const router = useRouter()
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    name: '',
-  })
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [name, setName] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    if (name === 'email') {
+      setEmail(value)
+    } else if (name === 'password') {
+      setPassword(value)
+    } else if (name === 'confirmPassword') {
+      setConfirmPassword(value)
+    } else if (name === 'name') {
+      setName(value)
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     // TODO: 회원가입 로직 구현
-    console.log('Signup attempt:', formData)
+    console.log('회원가입 시도:', { email, password, confirmPassword, name })
   }
 
   return (
@@ -45,7 +49,7 @@ export default function SignupPage() {
                 type="text"
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                value={formData.name}
+                value={name}
                 onChange={handleChange}
               />
             </div>
@@ -59,7 +63,7 @@ export default function SignupPage() {
                 type="email"
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                value={formData.email}
+                value={email}
                 onChange={handleChange}
               />
             </div>
@@ -73,7 +77,7 @@ export default function SignupPage() {
                 type="password"
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                value={formData.password}
+                value={password}
                 onChange={handleChange}
               />
             </div>
@@ -87,7 +91,7 @@ export default function SignupPage() {
                 type="password"
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-                value={formData.confirmPassword}
+                value={confirmPassword}
                 onChange={handleChange}
               />
             </div>
