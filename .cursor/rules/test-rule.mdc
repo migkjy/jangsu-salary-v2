@@ -1,0 +1,94 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+- You can @ files here
+- You can use markdown but dont have to
+
+
+## Development Rules
+
+### Initial Rules from Your Request
+1. **Check if Local Server is Running**
+   - Verify if a local server is already running (e.g., check port occupancy) and only start a new server if none is active.
+2. **Write Test Code Alongside Development**
+   - Always write test code (e.g., unit and integration tests) whenever new code is developed.
+3. **Run Tests Automatically When Starting the Local Server**
+   - Execute tests automatically as part of the local server startup process.
+
+### Additional Suggested Rules
+4. **Code Review Process**
+   - Require all code changes to be reviewed by at least one peer before merging to ensure quality and catch issues early.
+5. **Meaningful Commit Messages**
+   - Write clear commit messages that explain "why" and "what" was changed (e.g., `[feat] Add user auth: Implement JWT login`).
+6. **Code Formatting and Linting**
+   - Use formatting tools (e.g., Prettier) and linting tools (e.g., ESLint) to maintain consistent code style across the project.
+7. **Environment Variable Management**
+   - Store configuration details (e.g., port numbers, database credentials) in `.env` files and avoid hardcoding them in the source code.
+8. **Error Handling**
+   - Implement exception handling in all major functions and server endpoints to prevent crashes and improve reliability.
+9. **Documentation**
+   - Maintain concise documentation for key features, APIs, or setup instructions (e.g., update README.md with server startup steps).
+10. **Dependency Management**
+    - Specify versions of libraries and frameworks in use, and periodically remove unused dependencies.
+
+### Consolidated Final Rules
+Below is the complete list combining your initial rules with the additional suggestions, including brief explanations for implementation.
+
+1. **Check if Local Server is Running**
+   - Check for an active process (e.g., via port usage) and start the server only if none exists.
+   - *Example*: Use `netstat` or `lsof -i :port` to verify, then proceed with startup logic.
+2. **Write Test Code Alongside Development**
+   - Write unit and integration tests for all new code (e.g., using Jest or Mocha).
+   - Aim for at least 80% code coverage.
+3. **Run Tests Automatically When Starting the Local Server**
+   - Include a test execution command (e.g., `npm test`) in the server startup script.
+   - Integrate the same tests into CI/CD pipelines.
+4. **Code Review Process**
+   - Use Pull Requests (PRs) for code submissions, requiring at least one approval before merging.
+5. **Meaningful Commit Messages**
+   - Follow a format like `[type] subject: description` (e.g., `[fix] Resolve login error: Handle missing token`).
+6. **Code Formatting and Linting**
+   - Share Prettier and ESLint configs across the team, and enforce them pre-commit (e.g., with husky + lint-staged).
+7. **Environment Variable Management**
+   - Use `.env` files for configs, and add them to `.gitignore` to prevent sensitive data leaks.
+8. **Error Handling**
+   - Add try-catch blocks or middleware for exception handling and log errors appropriately.
+9. **Documentation**
+   - Keep a README.md in the project root with instructions for running and testing the server.
+10. **Dependency Management**
+    - Define versions in `package.json` and periodically audit dependencies for cleanup.
+
+### Additional Tips
+- **Sample Script**: Check server status and automate tests (Node.js example)
+  ```json
+  // package.json
+  {
+    "scripts": {
+      "start": "node checkServer.js && node server.js",
+      "test": "jest",
+      "dev": "npm run test && npm start"
+    }
+  }
+  ```
+  ```javascript
+  // checkServer.js
+  const net = require('net');
+  const PORT = process.env.PORT || 3000;
+
+  const server = net.createServer();
+  server.once('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${PORT} is already in use.`);
+      process.exit(1);
+    }
+  });
+  server.once('listening', () => {
+    server.close();
+  });
+  server.listen(PORT);
+  ```
