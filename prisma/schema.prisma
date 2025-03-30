@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 사용자 테이블: 관리자와 일반 유저(직원) 계정 정보
+model User {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String    @db.VarChar(100)
+  email         String    @unique @db.VarChar(150)
+  password_hash String    @db.VarChar(200)
+  role          String    @db.VarChar(20) // admin 또는 user
+  hourly_rate   Decimal   @db.Decimal(10, 2)
+  created_at    DateTime  @default(now()) @db.Timestamptz()
+  workLogs      WorkLog[] // 관계: 한 사용자는 여러 근무내역을 가짐
+
+  @@map("users")
+}
+
+// 근무내역 테이블: 각 직원의 일자별 근무내역
+model WorkLog {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user           User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id        String   @db.Uuid
+  work_date      DateTime @db.Date
+  start_time     DateTime @db.Time()
+  end_time       DateTime @db.Time()
+  work_hours     Decimal  @db.Decimal(4, 2)
+  hourly_rate    Decimal  @db.Decimal(10, 2)
+  payment_amount Decimal  @db.Decimal(10, 2)
+  memo           String?  @db.Text
+  created_at     DateTime @default(now()) @db.Timestamptz()
+
+  @@map("work_logs")
+} 

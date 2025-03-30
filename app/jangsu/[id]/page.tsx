@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { useParams, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useParams, useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 
 interface Jangsu {
   id: string
@@ -11,7 +11,7 @@ interface Jangsu {
   story: string
   wishes: string
   messages: string
-  status: 'draft' | 'published'
+  status: "draft" | "published"
 }
 
 export default function JangsuDetailPage() {
@@ -24,13 +24,13 @@ export default function JangsuDetailPage() {
     // TODO: API로 장수 데이터를 가져오는 로직 구현
     const tempData: Jangsu = {
       id: params.id as string,
-      title: '나의 첫 번째 장수',
-      birthDate: '1990-01-01',
-      deathDate: '2070-12-31',
-      story: '이것은 나의 인생 이야기입니다...',
-      wishes: '마지막으로 하고 싶은 것들...',
-      messages: '사랑하는 이들에게 전하는 메시지...',
-      status: 'draft'
+      title: "나의 첫 번째 장수",
+      birthDate: "1990-01-01",
+      deathDate: "2070-12-31",
+      story: "이것은 나의 인생 이야기입니다...",
+      wishes: "마지막으로 하고 싶은 것들...",
+      messages: "사랑하는 이들에게 전하는 메시지...",
+      status: "draft",
     }
     setJangsu(tempData)
     setLoading(false)
@@ -38,7 +38,7 @@ export default function JangsuDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="text-gray-600">로딩 중...</div>
       </div>
     )
@@ -46,7 +46,7 @@ export default function JangsuDetailPage() {
 
   if (!jangsu) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="text-gray-600">장수를 찾을 수 없습니다.</div>
       </div>
     )
@@ -54,17 +54,15 @@ export default function JangsuDetailPage() {
 
   return (
     <main className="min-h-screen p-8">
-      <div className="max-w-2xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
+      <div className="mx-auto max-w-2xl">
+        <div className="mb-8 flex items-center justify-between">
           <h1 className="text-3xl font-bold">{jangsu.title}</h1>
           <span
-            className={`px-3 py-1 rounded-full text-sm ${
-              jangsu.status === 'published'
-                ? 'bg-green-100 text-green-800'
-                : 'bg-gray-100 text-gray-800'
+            className={`rounded-full px-3 py-1 text-sm ${
+              jangsu.status === "published" ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"
             }`}
           >
-            {jangsu.status === 'published' ? '발행됨' : '임시저장'}
+            {jangsu.status === "published" ? "발행됨" : "임시저장"}
           </span>
         </div>
 
@@ -78,29 +76,29 @@ export default function JangsuDetailPage() {
 
           <section className="space-y-2">
             <h2 className="text-xl font-semibold">나의 이야기</h2>
-            <p className="text-gray-800 whitespace-pre-line">{jangsu.story}</p>
+            <p className="whitespace-pre-line text-gray-800">{jangsu.story}</p>
           </section>
 
           <section className="space-y-2">
             <h2 className="text-xl font-semibold">마지막 소원</h2>
-            <p className="text-gray-800 whitespace-pre-line">{jangsu.wishes}</p>
+            <p className="whitespace-pre-line text-gray-800">{jangsu.wishes}</p>
           </section>
 
           <section className="space-y-2">
             <h2 className="text-xl font-semibold">남기고 싶은 메시지</h2>
-            <p className="text-gray-800 whitespace-pre-line">{jangsu.messages}</p>
+            <p className="whitespace-pre-line text-gray-800">{jangsu.messages}</p>
           </section>
 
           <div className="flex gap-4 pt-8">
             <button
               onClick={() => router.push(`/jangsu/${jangsu.id}/edit`)}
-              className="flex-1 bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90"
+              className="bg-primary hover:bg-primary/90 flex-1 rounded-md px-4 py-2 text-white"
             >
               수정하기
             </button>
             <button
               onClick={() => router.back()}
-              className="flex-1 bg-gray-100 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-200"
+              className="flex-1 rounded-md bg-gray-100 px-4 py-2 text-gray-800 hover:bg-gray-200"
             >
               돌아가기
             </button>
@@ -109,4 +107,4 @@ export default function JangsuDetailPage() {
       </div>
     </main>
   )
-} 
+}

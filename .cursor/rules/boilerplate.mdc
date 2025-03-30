@@ -1,6 +1,11 @@
 ---
 description: 
 globs: 
+alwaysApply: false
+---
+---
+description: 
+globs: 
 alwaysApply: true
 ---
 
@@ -18,5 +23,7 @@ alwaysApply: true
 
 터미널 작업시에 노드 버전이 맞지 않는경우
 옯바른 버전을 설치하고, 전역으로 컴퓨터에 적용하도록 해. 
+
+깃 푸시를 하기 전에 반드시 먼저 린팅을 거치도록 해.
 
 vercel 배포는 따로 하지 않아도 되. git에 연동이되어 있어서 자동으로 배포가 되.

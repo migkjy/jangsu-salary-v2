@@ -1,23 +1,23 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
-import { useState } from 'react'
+import Link from "next/link"
+import { useState } from "react"
 
 export default function SignupPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [name, setName] = useState('')
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [name, setName] = useState("")
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    if (name === 'email') {
+    if (name === "email") {
       setEmail(value)
-    } else if (name === 'password') {
+    } else if (name === "password") {
       setPassword(value)
-    } else if (name === 'confirmPassword') {
+    } else if (name === "confirmPassword") {
       setConfirmPassword(value)
-    } else if (name === 'name') {
+    } else if (name === "name") {
       setName(value)
     }
   }
@@ -25,17 +25,15 @@ export default function SignupPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     // TODO: 회원가입 로직 구현
-    console.log('회원가입 시도:', { email, password, confirmPassword, name })
+    console.log("회원가입 시도:", { email, password, confirmPassword, name })
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-8">
-      <div className="max-w-md w-full space-y-8">
+    <main className="flex min-h-screen items-center justify-center p-8">
+      <div className="w-full max-w-md space-y-8">
         <div>
-          <h2 className="text-3xl font-bold text-center">회원가입</h2>
-          <p className="mt-2 text-center text-gray-600">
-            장수와 함께 특별한 순간을 준비하세요
-          </p>
+          <h2 className="text-center text-3xl font-bold">회원가입</h2>
+          <p className="mt-2 text-center text-gray-600">장수와 함께 특별한 순간을 준비하세요</p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
@@ -48,7 +46,7 @@ export default function SignupPage() {
                 name="name"
                 type="text"
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
                 value={name}
                 onChange={handleChange}
               />
@@ -62,7 +60,7 @@ export default function SignupPage() {
                 name="email"
                 type="email"
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
                 value={email}
                 onChange={handleChange}
               />
@@ -76,7 +74,7 @@ export default function SignupPage() {
                 name="password"
                 type="password"
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
                 value={password}
                 onChange={handleChange}
               />
@@ -90,7 +88,7 @@ export default function SignupPage() {
                 name="confirmPassword"
                 type="password"
                 required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
                 value={confirmPassword}
                 onChange={handleChange}
               />
@@ -98,10 +96,7 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90"
-            >
+            <button type="submit" className="bg-primary hover:bg-primary/90 w-full rounded-md px-4 py-2 text-white">
               가입하기
             </button>
           </div>
@@ -109,7 +104,7 @@ export default function SignupPage() {
 
         <div className="text-center">
           <p className="text-sm text-gray-600">
-            이미 계정이 있으신가요?{' '}
+            이미 계정이 있으신가요?{" "}
             <Link href="/login" className="text-primary hover:underline">
               로그인
             </Link>
@@ -118,4 +113,4 @@ export default function SignupPage() {
       </div>
     </main>
   )
-} 
+}
