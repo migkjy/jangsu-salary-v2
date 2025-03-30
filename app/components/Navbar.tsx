@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { UserButton } from '@stackframe/stack';
+import Link from 'next/link';
 
 export default function Navbar() {
   return (

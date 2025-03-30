@@ -2,6 +2,7 @@
 
 import { useUser } from '@stackframe/stack';
 import { redirect } from 'next/navigation';
+import Image from 'next/image';
 
 export default function ProfilePage() {
   const user = useUser({ or: 'redirect' });
@@ -17,10 +18,12 @@ export default function ProfilePage() {
         <div className="bg-white shadow rounded-lg p-6">
           <div className="flex items-center space-x-4 mb-6">
             {user.avatarUrl && (
-              <img
+              <Image
                 src={user.avatarUrl}
                 alt={user.displayName || '프로필 이미지'}
-                className="w-20 h-20 rounded-full"
+                width={80}
+                height={80}
+                className="rounded-full"
               />
             )}
             <div>
