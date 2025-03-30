@@ -17,9 +17,9 @@ export default function ProfilePage() {
         <h1 className="text-3xl font-bold mb-8">프로필</h1>
         <div className="bg-white shadow rounded-lg p-6">
           <div className="flex items-center space-x-4 mb-6">
-            {user.imageUrl && (
+            {user.image && (
               <Image
-                src={user.imageUrl}
+                src={user.image}
                 alt={user.displayName || '프로필 이미지'}
                 width={80}
                 height={80}
