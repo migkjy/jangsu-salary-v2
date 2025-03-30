@@ -31,7 +31,7 @@ export default function JangsuDetailPage() {
         story: '이것은 나의 인생 이야기입니다...',
         wishes: '마지막으로 하고 싶은 것들...',
         messages: '사랑하는 이들에게 전하는 메시지...',
-        status: '임시저장'
+        status: 'draft'
       })
       setLoading(false)
     }, 1000)

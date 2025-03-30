@@ -1,8 +1,8 @@
 'use client';
 
 import { useUser } from '@stackframe/stack';
-import { redirect } from 'next/navigation';
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
 export default function ProfilePage() {
   const user = useUser({ or: 'redirect' });
